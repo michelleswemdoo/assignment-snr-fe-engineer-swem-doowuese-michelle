@@ -1,7 +1,12 @@
+import { FormBuilderProvider } from './features/FormBuilder/context/FormBuilderContext';
+import { ConfigurableFormBuilder } from './features/FormBuilder/components/ConfigurableFormBuilder';
+
 import './App.css';
 
-function App() {
-  return <div>Michelle</div>;
-}
-
-export default App;
+export const App: React.FC = () => {
+  return (
+    <FormBuilderProvider>
+      <ConfigurableFormBuilder />
+    </FormBuilderProvider>
+  );
+};
