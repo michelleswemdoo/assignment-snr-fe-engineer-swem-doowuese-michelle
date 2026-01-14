@@ -8,7 +8,7 @@ type CheckboxProps = Omit<
   label?: string;
 };
 
-export const Checkbox: React.FC<CheckboxProps> = ({
+export const Checkbox = ({
   label,
   className = '',
   id,
@@ -17,7 +17,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   disabled,
   required,
   ...props
-}) => {
+}: CheckboxProps) => {
   const generatedId = useId();
   const checkboxId = id || generatedId;
 

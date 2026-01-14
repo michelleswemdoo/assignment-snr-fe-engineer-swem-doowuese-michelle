@@ -7,7 +7,7 @@ type SelectProps = React.SelectHTMLAttributes<HTMLSelectElement> & {
   options: { value: string; label: string }[];
 };
 
-export const Select: React.FC<SelectProps> = ({
+export const Select = ({
   label,
   error,
   options,
@@ -18,7 +18,7 @@ export const Select: React.FC<SelectProps> = ({
   required,
   disabled,
   ...props
-}) => {
+}: SelectProps) => {
   const generatedId = useId();
   const selectId = id || generatedId;
 

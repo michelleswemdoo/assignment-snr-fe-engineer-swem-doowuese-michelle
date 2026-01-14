@@ -10,13 +10,13 @@ type ModalProps = {
   footer?: React.ReactNode;
 };
 
-export const Modal: React.FC<ModalProps> = ({
+export const Modal = ({
   isOpen,
   onClose,
   title,
   children,
   footer,
-}) => {
+}: ModalProps) => {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';

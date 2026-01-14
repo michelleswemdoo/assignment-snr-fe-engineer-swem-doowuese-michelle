@@ -1,4 +1,4 @@
-import React, { createContext, useState, useCallback } from 'react';
+import { createContext, useState, useCallback } from 'react';
 import type { ReactNode } from 'react';
 import i18n from '@/libs/i18n/config';
 import type {
@@ -36,9 +36,7 @@ export const FormBuilderContext = createContext<
   FormBuilderContextType | undefined
 >(undefined);
 
-export const FormBuilderProvider: React.FC<FormBuilderProviderProps> = ({
-  children,
-}) => {
+export const FormBuilderProvider = ({ children }: FormBuilderProviderProps) => {
   const [config, setConfig] = useState<FormConfig>({ fields: [] });
 
   /**
@@ -157,7 +155,7 @@ export const FormBuilderProvider: React.FC<FormBuilderProviderProps> = ({
                       field.type === 'group'
                         ? (field as GroupField).fields
                         : [],
-                  } as FormField;
+                  };
                 } else {
                   // Converting from group: remove group-specific properties
                   // Create a clean field based on the new type
@@ -173,10 +171,10 @@ export const FormBuilderProvider: React.FC<FormBuilderProviderProps> = ({
                       ...baseField,
                       min: 'min' in updates ? updates.min : undefined,
                       max: 'max' in updates ? updates.max : undefined,
-                    } as FormField;
+                    };
                   }
 
-                  return baseField as FormField;
+                  return baseField;
                 }
               }
 

@@ -6,7 +6,7 @@ type TextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
   error?: string;
 };
 
-export const Textarea: React.FC<TextareaProps> = ({
+export const Textarea = ({
   label,
   error,
   className = '',
@@ -19,7 +19,7 @@ export const Textarea: React.FC<TextareaProps> = ({
   disabled,
   readOnly,
   ...props
-}) => {
+}: TextareaProps) => {
   const generatedId = useId();
   const textareaId = id || generatedId;
 

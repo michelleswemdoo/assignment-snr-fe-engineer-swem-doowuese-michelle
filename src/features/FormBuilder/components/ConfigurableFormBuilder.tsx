@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Button } from '@/components/ui/Button';
@@ -9,7 +9,7 @@ import { FieldTree } from '@/features/FormBuilder/components/FieldTree';
 import { FormPreview } from '@/features/FormBuilder/components/FormPreview';
 import type { FieldType } from '@/features/FormBuilder/types';
 
-export const ConfigurableFormBuilder: React.FC = () => {
+export const ConfigurableFormBuilder = () => {
   const { t } = useTranslation();
   const { config, updateConfig, addField } = useFormBuilder();
   const [showExportModal, setShowExportModal] = useState(false);
@@ -96,10 +96,10 @@ export const ConfigurableFormBuilder: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-6 flex items-center justify-between">
-          <h1 className="text-3xl font-bold text-gray-900">
+    <div className="bg-gray-100 p-6 min-h-screen">
+      <div className="mx-auto max-w-7xl">
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="font-bold text-gray-900 text-3xl">
             {t('formBuilder.title')}
           </h1>
           <div className="flex gap-2">
@@ -112,14 +112,14 @@ export const ConfigurableFormBuilder: React.FC = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
-            <h2 className="text-xl font-semibold mb-4 text-gray-800">
+        <div className="gap-6 grid grid-cols-1 lg:grid-cols-2">
+          <div className="bg-white shadow-lg p-6 border border-gray-200 rounded-lg">
+            <h2 className="mb-4 font-semibold text-gray-800 text-xl">
               {t('formBuilder.formBuilder')}
             </h2>
 
             <div className="mb-4">
-              <p className="text-sm text-gray-600 mb-2">
+              <p className="mb-2 text-gray-600 text-sm">
                 {t('formBuilder.addNewField')}
               </p>
               <div className="flex flex-wrap gap-2">
@@ -162,8 +162,12 @@ export const ConfigurableFormBuilder: React.FC = () => {
           <>
             <Button
               variant="secondary"
-              onClick={() => {
-                navigator.clipboard.writeText(exportedJson);
+              onClick={async () => {
+                try {
+                  await navigator.clipboard.writeText(exportedJson);
+                } catch {
+                  //
+                }
               }}
             >
               {t('formBuilder.buttons.copyToClipboard')}
@@ -221,7 +225,7 @@ export const ConfigurableFormBuilder: React.FC = () => {
           error={importError}
         />
         {importError && (
-          <p role="alert" className="mt-2 text-sm text-red-600">
+          <p role="alert" className="mt-2 text-red-600 text-sm">
             {importError}
           </p>
         )}

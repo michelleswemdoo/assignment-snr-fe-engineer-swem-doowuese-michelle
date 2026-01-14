@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { FormField } from '../types';
 import { Input } from '@/components/ui/Input';
@@ -15,7 +15,7 @@ type FieldEditorProps = {
   canMoveDown: boolean;
 };
 
-export const FieldEditor: React.FC<FieldEditorProps> = ({
+export const FieldEditor = ({
   field,
   onUpdate,
   onDelete,
@@ -23,7 +23,7 @@ export const FieldEditor: React.FC<FieldEditorProps> = ({
   onMoveDown,
   canMoveUp,
   canMoveDown,
-}) => {
+}: FieldEditorProps) => {
   const { t } = useTranslation();
   const [label, setLabel] = useState(field.label);
   const [required, setRequired] = useState(field.required);
@@ -102,13 +102,13 @@ export const FieldEditor: React.FC<FieldEditorProps> = ({
 
   return (
     <div
-      className="border border-gray-300  rounded-lg p-4 "
+      className="p-4 border border-gray-300 rounded-lg"
       data-testid={`field-editor-${field.id}`}
     >
-      <div className="flex items-start justify-between mb-4">
+      <div className="flex justify-between items-start mb-4">
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-3">
-            <span className="px-2 py-1 text-xs font-semibold bg-blue-100 text-blue-800 rounded">
+            <span className="bg-blue-100 px-2 py-1 rounded font-semibold text-blue-800 text-xs">
               {field.type.toUpperCase()}
             </span>
           </div>
@@ -128,7 +128,7 @@ export const FieldEditor: React.FC<FieldEditorProps> = ({
             />
 
             {field.type === 'number' && (
-              <div className="grid grid-cols-2 gap-3">
+              <div className="gap-3 grid grid-cols-2">
                 <Input
                   label={t('formBuilder.common.min')}
                   type="number"
@@ -149,7 +149,7 @@ export const FieldEditor: React.FC<FieldEditorProps> = ({
         </div>
       </div>
 
-      <div className="flex items-center justify-end gap-2 pt-3">
+      <div className="flex justify-end items-center gap-2 pt-3">
         <div className="flex gap-1">
           <Button
             size="sm"

@@ -48,7 +48,7 @@ const isEmptyValue = (value: unknown): boolean => {
   return false;
 };
 
-export const FormPreview: React.FC<FormPreviewProps> = ({ fields }) => {
+export const FormPreview = ({ fields }: FormPreviewProps) => {
   const { t } = useTranslation();
   const [formData, setFormData] = useState<FormData>({});
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -126,7 +126,7 @@ export const FormPreview: React.FC<FormPreviewProps> = ({ fields }) => {
           if (!current[parentId] || typeof current[parentId] !== 'object') {
             current[parentId] = {};
           }
-          current = current[parentId] as FormData;
+          current = current[parentId];
         }
 
         current[fieldId] = value;
@@ -150,14 +150,14 @@ export const FormPreview: React.FC<FormPreviewProps> = ({ fields }) => {
       let current = formData;
       for (const parentId of parentPath) {
         if (!current[parentId] || typeof current[parentId] !== 'object') {
-          return undefined;
+          return;
         }
-        current = current[parentId] as FormData;
+        current = current[parentId];
       }
       const value = current[fieldId];
       if (typeof value === 'object' && value !== null) return undefined;
 
-      return value as PrimitiveValue | undefined;
+      return value;
     },
     [formData],
   );
@@ -178,7 +178,7 @@ export const FormPreview: React.FC<FormPreviewProps> = ({ fields }) => {
           currentData = {};
           break;
         }
-        currentData = currentData[parentId] as FormData;
+        currentData = currentData[parentId];
       }
 
       for (const field of fieldsToCheck) {

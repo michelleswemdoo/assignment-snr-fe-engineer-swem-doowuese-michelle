@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import type { FieldType, FormField, GroupField } from '../types';
 import { FieldEditor } from './FieldEditor';
@@ -10,7 +9,7 @@ type FieldTreeProps = {
   parentId: string | null;
 };
 
-export const FieldTree: React.FC<FieldTreeProps> = ({ fields }) => {
+export const FieldTree = ({ fields }: FieldTreeProps) => {
   const { updateField, deleteField, moveField, addField } = useFormBuilder();
 
   return (
@@ -65,7 +64,7 @@ type AddFieldButtonsProps = {
   onAddField: (type: FieldType) => void;
 };
 
-const AddFieldButtons: React.FC<AddFieldButtonsProps> = ({ onAddField }) => {
+const AddFieldButtons = ({ onAddField }: AddFieldButtonsProps) => {
   const { t } = useTranslation();
   return (
     <div className="flex flex-wrap gap-2" data-testid="add-field-buttons">
@@ -97,7 +96,7 @@ const AddFieldButtons: React.FC<AddFieldButtonsProps> = ({ onAddField }) => {
   );
 };
 
-const EmptyFieldsMessage: React.FC = () => {
+const EmptyFieldsMessage = () => {
   const { t } = useTranslation();
   return (
     <div className="text-gray-500 text-sm italic p-4 bg-gray-200 rounded border border-dashed border-gray-300">

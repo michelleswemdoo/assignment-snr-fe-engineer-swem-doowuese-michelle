@@ -53,7 +53,6 @@ export const findField = (
           const found = searchRecursive((field as GroupField).fields, nextPath);
           if (found) return found;
         } else {
-          // parentPath.length === 0 case already handled by early return above
           const isAtOrBeyondPrefix = pathStartsWith(nextPath, parentPath);
           const isBuildingPrefix =
             nextPath.length < parentPath.length &&
