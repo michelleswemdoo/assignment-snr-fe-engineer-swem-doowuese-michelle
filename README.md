@@ -28,6 +28,12 @@ npm run dev
 npm run build
 ```
 
+### Run tests.
+
+```sh
+npm run test
+```
+
 ### Tools and library
 
 ##### React + TypeScript + Vite + Tailwind CSS
