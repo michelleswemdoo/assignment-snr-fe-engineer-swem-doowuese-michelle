@@ -35,6 +35,7 @@ export const FieldEditor = ({
   );
   const labelInputRef = useRef<HTMLInputElement>(null);
 
+  // Initialize state when field changes and sync with props
   useEffect(() => {
     setLabel(field.label);
     setRequired(field.required);

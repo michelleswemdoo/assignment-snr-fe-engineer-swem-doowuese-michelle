@@ -106,6 +106,7 @@ export const FormBuilderProvider = ({ children }: FormBuilderProviderProps) => {
         }
 
         // Find parent and add field to it
+        //Recursive function to traverse and update fields
         let parentFound = false;
         const updateFields = (fields: FormField[]): FormField[] => {
           return fields.map((field) => {
@@ -129,10 +130,10 @@ export const FormBuilderProvider = ({ children }: FormBuilderProviderProps) => {
           console.warn(
             `Parent field with ID "${parentId}" not found. Adding field to root level.`,
           );
-          return { fields: [...updatedFields, newField] };
+          return { fields: [...updatedFields, newField] }; // updating the root if no parentID
         }
-
-        return { fields: updatedFields };
+        // root gets updated tree
+        return { fields: updatedFields }; //parentId found; tree already updated at correct nested level
       });
     },
     [],
@@ -238,7 +239,7 @@ export const FormBuilderProvider = ({ children }: FormBuilderProviderProps) => {
             return field;
           });
         }
-
+        // Field found, perform move
         const newIndex = direction === 'up' ? index - 1 : index + 1;
 
         // Cannot move beyond array bounds
@@ -252,6 +253,12 @@ export const FormBuilderProvider = ({ children }: FormBuilderProviderProps) => {
           newFields[newIndex],
           newFields[index],
         ];
+
+        // Alternative swap method: using a temp variable
+        // const newFields = [...fields];
+        // const temp = newFields[index]
+        // newFields[index] = newFields[newIndex]
+        // newFields[newIndex] = temp
 
         return newFields;
       };

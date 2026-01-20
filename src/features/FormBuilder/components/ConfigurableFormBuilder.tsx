@@ -29,16 +29,20 @@ export const ConfigurableFormBuilder = () => {
 
   const handleImportSubmit = useCallback(() => {
     try {
+      // parse JSON
       const parsed = JSON.parse(importJson);
 
+      // ensure it's an object
       if (!parsed || typeof parsed !== 'object') {
         throw new Error(t('formBuilder.messages.invalidFormat'));
       }
 
+      // ensure fields property exists and is an array
       if (!Array.isArray(parsed.fields)) {
         throw new Error(t('formBuilder.messages.missingFields'));
       }
 
+      // type definition for field validation
       type ParsedField = {
         id?: unknown;
         type?: unknown;
@@ -49,6 +53,7 @@ export const ConfigurableFormBuilder = () => {
         max?: unknown;
       };
 
+      // Recursive validation function
       const validateField = (field: ParsedField): boolean => {
         if (!field || typeof field !== 'object') return false;
         if (!field.id || typeof field.id !== 'string') return false;

@@ -18,6 +18,9 @@ type FormPreviewProps = {
 
 type PrimitiveValue = string | number | null;
 
+// Record constructs an object type whose keys are Keys and values are Type for example
+// Record<K, T> k are the keys and T are the values.
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type FormData = Record<string, PrimitiveValue | Record<string, any>>;
 
@@ -48,6 +51,10 @@ const isEmptyValue = (value: unknown): boolean => {
   return false;
 };
 
+// // Alternative concise version:
+// const isEmptyValue = (value: unknown): boolean =>
+//   value === null || (typeof value === 'string' && value.trim() === '');
+
 export const FormPreview = ({ fields }: FormPreviewProps) => {
   const { t } = useTranslation();
   const [formData, setFormData] = useState<FormData>({});
@@ -55,12 +62,16 @@ export const FormPreview = ({ fields }: FormPreviewProps) => {
   const [showSubmitModal, setShowSubmitModal] = useState(false);
   const [submittedData, setSubmittedData] = useState<FormData | null>(null);
 
-  useEffect(() => {
+  const resetForm = () => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setFormData({});
     setErrors({});
     setSubmittedData(null);
     setShowSubmitModal(false);
+  };
+
+  useEffect(() => {
+    resetForm();
   }, [fields]);
 
   const validateValue = useCallback(

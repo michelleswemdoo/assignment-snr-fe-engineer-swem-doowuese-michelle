@@ -1,5 +1,7 @@
 import type { FormField, GroupField } from '../types';
 
+// So the result gives you:the actual field, the list it lives in, and its position in that list
+
 export type FieldSearchResult = {
   field: FormField;
   parent: FormField[];
@@ -21,9 +23,14 @@ const checkWithinScope = (
 
   if (parentPath.length === 0) return currentPath.length === 0;
 
+  // currentpath is where I am now
+  // parentPath is where I want to be or look
   return pathStartsWith(currentPath, parentPath);
 };
+// This code is not just about “does the field exist?” but also about
+// navigating a tree structure safely and predictably.
 
+// Depth-First Search with path-prefix pruning
 export const findField = (
   fieldId: string,
   fields: FormField[],
