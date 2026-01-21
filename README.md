@@ -19,7 +19,7 @@ npm install
 ### Compile and Hot-Reload for Development and Manages packages on your local computer, for development.
 
 ```sh
-npm run dev
+npm run start
 ```
 
 ### Type-Check, Compile and Minify for Production run all task for production.
